@@ -2,13 +2,20 @@
 <head>
   <link rel="stylesheet" href="/styles.css">
 </head>
-
-<div id="map"></div>
+<body>
+<div id="app">
+  <div id="map"></div>
+   <component1 />
+</div>
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMkqm5P_2BqnBuMQTzinbxUV3WfkelZPI"></script>
 <script type="module">
   import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
   import MyComponent from './my-component.js'
-  
-  createApp(MyComponent).mount('#map')
+  import component1 from './user-pannel.js'
+  const app = createApp(MyComponent)
+  app.component('component1', component1)
+  app.mount('#app')
+  //createApp(MyComponent).mount('#app')
 </script>
+</body>
 
