@@ -1,16 +1,20 @@
 import 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'
 import component1 from './user-pannel.js'
 export default {
-  compnents: {component1},
+  compnents: {component1: component1},
   data() {
     let position = null;
-    return {position}
+    let title = 'hey'
+    return {position, title}
   },
   mounted() {
     console.log('mounted init')
     this.initMap()
   },
   methods: {
+    begin(n) {
+      console.log('yo pa',n)
+    },
     initMap() {
      const map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 51.531795246662604, lng: -0.21797176148605957},
@@ -33,6 +37,6 @@ export default {
         marker.setPosition(mapsMouseEvent.latLng)  
       });
     },
-  template: `<component1 />`
-},
+  },
+  template: `<div><div id='map'></div><component1 @activate-begin='begin'/></div>`
 }
