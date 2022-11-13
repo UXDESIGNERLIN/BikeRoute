@@ -1,27 +1,26 @@
-import 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'
-import journeyPlanning from './journey-planning.js'
+import 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js';
+import journeyPlanning from './journey-planning.js';
 import leisureRoutes from './leisure-routes.js';
+import { leisureRouteEndpoint } from './services.js';
 export default {
   compnents: {
     journeyPlanning: journeyPlanning,
     leisureRoutes: leisureRoutes
   },
   data() {
-    let position = null;
-    let title = 'hey'
-    return {position, title}
+    let position = {lat: 51.531795246662604, lng: -0.21797176148605957};
+    return {position}
   },
   mounted() {
-    console.log('mounted init')
     this.initMap()
   },
   methods: {
-    begin(n) {
-      console.log('yo pa',n)
+    getLeisureRoutes(options) {
+      axios.get(leisureRouteEndpoint(this.position, options)).then((x) => {console.log(x)})
     },
     initMap() {
      const map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 51.531795246662604, lng: -0.21797176148605957},
+      center: this.position,
         zoom: 18,
         mapId: '73096215c34dca50'
       });
@@ -42,5 +41,5 @@ export default {
       });
     },
   },
-  template: `<div><div id='map'></div><journey-planning @route-planning='begin'/></div>`
+  template: `<div><div id='map'></div><leisure-routes @get-leisure-options='getLeisureRoutes'/></div>`
 }
