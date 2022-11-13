@@ -9,14 +9,21 @@ export default {
   },
   data() {
     let position = {lat: 51.531795246662604, lng: -0.21797176148605957};
-    return {position}
+    return { position} 
   },
   mounted() {
     this.initMap()
   },
   methods: {
-    getLeisureRoutes(options) {
-      axios.get(leisureRouteEndpoint(this.position, options)).then((x) => {console.log(x)})
+    computePositionForEndpoint(position) {
+      console.log('tt', `${position.lng},${position.lat}`, position)
+      return `${position.lng},${position.lat}`
+      //return position
+    },
+    async getLeisureRoutes(options) {
+     const data = await axios.get(leisureRouteEndpoint(this.computePositionForEndpoint(this.position)))
+     console.log('data',data)
+     return data
     },
     initMap() {
      const map = new google.maps.Map(document.getElementById('map'), {
@@ -38,6 +45,7 @@ export default {
       });
       map.addListener("click", (mapsMouseEvent) => {
         marker.setPosition(mapsMouseEvent.latLng)  
+        this.position = {lat: marker.getPosition().lat(), lng: marker.getPosition().lng()}
       });
     },
   },
