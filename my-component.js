@@ -20,10 +20,13 @@ export default {
       return `${position.lng},${position.lat}`
       //return position
     },
+    async drawRoute(options) {
+      const data = await this.getLeisureRoutes(options)
+      const {start_latitude ,start_longitude, finish_latitude, finish_longitude} = data
+    },
     async getLeisureRoutes(options) {
-     const data = await axios.get(leisureRouteEndpoint(this.computePositionForEndpoint(this.position)))
-     console.log('data',data)
-     return data
+     const data = await axios.get(leisureRouteEndpoint(this.computePositionForEndpoint(this.position), options))
+     return data.data.marker[0]['@attributes']
     },
     initMap() {
      const map = new google.maps.Map(document.getElementById('map'), {
@@ -49,5 +52,5 @@ export default {
       });
     },
   },
-  template: `<div><div id='map'></div><leisure-routes @get-leisure-options='getLeisureRoutes'/></div>`
+  template: `<div><div id='map'></div><leisure-routes @get-leisure-options='drawRoute'/></div>`
 }
