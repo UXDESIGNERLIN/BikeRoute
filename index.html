@@ -8,9 +8,11 @@
 <script type="module">
   import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
   import MyComponent from './my-component.js'
-  import component1 from './user-pannel.js'
+  import journeyPlanning from './journey-planning.js'
+  import leisureRoutes from './leisure-routes.js'
   const app = createApp(MyComponent)
-  app.component('component1', component1)
+  app.component('journeyPlanning', journeyPlanning)
+  app.component('leisureRoutes', leisureRoutes)
   app.mount('#app')
   //createApp(MyComponent).mount('#app')
 </script>

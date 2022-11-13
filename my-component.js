@@ -1,7 +1,11 @@
 import 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'
-import component1 from './user-pannel.js'
+import journeyPlanning from './journey-planning.js'
+import leisureRoutes from './leisure-routes.js';
 export default {
-  compnents: {component1: component1},
+  compnents: {
+    journeyPlanning: journeyPlanning,
+    leisureRoutes: leisureRoutes
+  },
   data() {
     let position = null;
     let title = 'hey'
@@ -38,5 +42,5 @@ export default {
       });
     },
   },
-  template: `<div><div id='map'></div><component1 @activate-begin='begin'/></div>`
+  template: `<div><div id='map'></div><journey-planning @route-planning='begin'/></div>`
 }
