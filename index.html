@@ -4,12 +4,13 @@
 </head>
 <body>
 <div id="app"></div>
-<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMkqm5P_2BqnBuMQTzinbxUV3WfkelZPI"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
 <script type="module">
   import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
   import MyComponent from './my-component.js'
   import journeyPlanning from './journey-planning.js'
   import leisureRoutes from './leisure-routes.js'
+
   const app = createApp(MyComponent)
   app.component('journeyPlanning', journeyPlanning)
   app.component('leisureRoutes', leisureRoutes)

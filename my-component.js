@@ -19,21 +19,14 @@ export default {
     setDirections(result, status) {
       const directionsRenderer = new google.maps.DirectionsRenderer();
       directionsRenderer.setMap(this.map)
-      //let directionsService = new google.maps.DirectionsService();
       if (status == google.maps.DirectionsStatus.OK) {
-
-        //display route
-        console.log(result)
         directionsRenderer.setDirections(result);
     } else {
-        //delete route from map
         directionsRenderer.setDirections({ routes: [] });
       }
     },
     computePositionForEndpoint(position) {
-      console.log('tt', `${position.lng},${position.lat}`, position)
       return `${position.lng},${position.lat}`
-      //return position
     },
     async setRoute(options) {
       const coordinates = await this.getLeisureRoutes(options); 
@@ -45,7 +38,7 @@ export default {
         }
         arr.push(coordinatesArray[key])
         if(key%2 !== 0) {
-          this.calculateRoute(arr)
+           this.calculateRoute(arr)
         }
       }
     },
